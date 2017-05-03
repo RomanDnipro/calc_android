@@ -23,7 +23,7 @@ public class CalcActivity extends Activity {
 
     private TextView mTvResult;
 
-    private String res;
+    private String res = "";
     String[] numbers;
 
 //    public String getRes() {
@@ -39,18 +39,18 @@ public class CalcActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calc);
 
-        mTvResult = (TextView)findViewById(R.id.tv_result);
+        mTvResult = (TextView) findViewById(R.id.tv_result);
 
 
-        mBt01 = (Button)findViewById(R.id.bt_1);
-        mBt02 = (Button)findViewById(R.id.bt_2);
-        mBt03 = (Button)findViewById(R.id.bt_3);
-        mBt04 = (Button)findViewById(R.id.bt_4);
-        mBt05 = (Button)findViewById(R.id.bt_5);
-        mBt06 = (Button)findViewById(R.id.bt_6);
-        mBtClear = (Button)findViewById(R.id.bt_clear);
-        mBtPlus = (Button)findViewById(R.id.bt_plus);
-        mBtResult = (Button)findViewById(R.id.bt_result);
+        mBt01 = (Button) findViewById(R.id.bt_1);
+        mBt02 = (Button) findViewById(R.id.bt_2);
+        mBt03 = (Button) findViewById(R.id.bt_3);
+        mBt04 = (Button) findViewById(R.id.bt_4);
+        mBt05 = (Button) findViewById(R.id.bt_5);
+        mBt06 = (Button) findViewById(R.id.bt_6);
+        mBtClear = (Button) findViewById(R.id.bt_clear);
+        mBtPlus = (Button) findViewById(R.id.bt_plus);
+        mBtResult = (Button) findViewById(R.id.bt_result);
 
 
         mBt01.setOnClickListener(new View.OnClickListener() {
@@ -112,8 +112,7 @@ public class CalcActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                method("+",res);  //prohibit several pluses in a row and like first sign
-
+                method("+", res);  //prohibit several pluses in a row and like first sign
 
 
 //                if (res.isEmpty()){
@@ -138,10 +137,14 @@ public class CalcActivity extends Activity {
                 res = "";
                 int resInt = 0;
                 for (String number : numbers) {
-                    resInt += Integer.parseInt(number);
+                    try{
+                        resInt += Integer.parseInt(number);
+                    }catch (Exception e){
+                        Toast.makeText(getApplicationContext(), "Exception!", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 res = String.valueOf(resInt);
-                mTvResult.setText(res);
+                mTvResult.setText(resInt);
                 res = "";
             }
         });
@@ -149,14 +152,16 @@ public class CalcActivity extends Activity {
 
     }
 
-    void method(String s){
+    void method(String s) {
 //        Toast.makeText(getApplicationContext(), "Вы нажали кнопку 1", Toast.LENGTH_SHORT).show();
         mTvResult.setText(mTvResult.getText() + s);
     }
 
-    void method(String s, String res){
+    void method(String s, String res) {
         mTvResult.setText(mTvResult.getText() + s);
-        res += s;
+        this.res += s;
+        Toast.makeText(getApplicationContext(), res, Toast.LENGTH_SHORT).show();
+
     }
 
 
