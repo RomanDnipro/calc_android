@@ -19,9 +19,8 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:textAlignment="textEnd"
             android:elevation="1dp"
-            android:text="efwfwef"
+            android:textAlignment="textEnd"
             android:textColor="@android:color/black"
             android:textIsSelectable="false"
             android:textSize="30sp" />

@@ -23,6 +23,16 @@ public class CalcActivity extends Activity {
 
     private TextView mTvResult;
 
+    private String res;
+    String[] numbers;
+
+//    public String getRes() {
+//        return res;
+//    }
+//
+//    public void setRes(String res) {
+//        this.res = res;
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,32 +52,112 @@ public class CalcActivity extends Activity {
         mBtPlus = (Button)findViewById(R.id.bt_plus);
         mBtResult = (Button)findViewById(R.id.bt_result);
 
+
         mBt01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Date date = new Date();
-                Toast.makeText(getApplicationContext(), "Вы нажали кнопку 1", Toast.LENGTH_SHORT).show();
-                mTvResult.setText("Нажата кнопка 1 " + date);
+//                Date date = new Date();
+//                Toast.makeText(getApplicationContext(), "Вы нажали кнопку 1", Toast.LENGTH_SHORT).show();
+//                mTvResult.setText("Нажата кнопка 1 " + date);
+                method("1", res);
             }
         });
 
         mBt02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Вы нажали кнопку 2", Toast.LENGTH_SHORT).show();
-                mTvResult.setText("Нажата кнопка 2");
+//                Toast.makeText(getApplicationContext(), "Вы нажали кнопку 2", Toast.LENGTH_SHORT).show();
+//                mTvResult.setText("Нажата кнопка 2");
+                method("2", res);
+            }
+        });
+
+        mBt03.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                method("3", res);
+            }
+        });
+
+        mBt04.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                method("4", res);
+            }
+        });
+
+        mBt05.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                method("5", res);
+            }
+        });
+
+        mBt06.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                method("6", res);
+            }
+        });
+
+        mBtClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                res = "";
+                mTvResult.setText("");
+            }
+        });
+
+        mBtPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                method("+",res);  //prohibit several pluses in a row and like first sign
+
+
+
+//                if (res.isEmpty()){
+//                    method("");
+//                }
+//                if (res.charAt(res.length() - 1) == 43){
+//                    mTvResult.setText("plus before");
+//                }
+////                if (!("" + res.charAt(res.length() - 1)).equals("+") &&
+////                        !(res.equals(null)
+////                        /*"" + mTvResult.getText().charAt(mTvResult.getText().length() - 1) != ""*/)) {
+////                    method("+", res);
+////                } else method("");
+            }
+        });
+
+        mBtResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                numbers = res.split("\\+");
+                res = "";
+                int resInt = 0;
+                for (String number : numbers) {
+                    resInt += Integer.parseInt(number);
+                }
+                res = String.valueOf(resInt);
+                mTvResult.setText(res);
+                res = "";
             }
         });
 
 
-
     }
 
-//    private void method(){
-//
+    void method(String s){
 //        Toast.makeText(getApplicationContext(), "Вы нажали кнопку 1", Toast.LENGTH_SHORT).show();
-//        mTvResult.setText("Нажата кнопка 1 " + date);
-//    }
+        mTvResult.setText(mTvResult.getText() + s);
+    }
+
+    void method(String s, String res){
+        mTvResult.setText(mTvResult.getText() + s);
+        res += s;
+    }
 
 
 }
