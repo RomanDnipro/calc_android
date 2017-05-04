@@ -24,7 +24,7 @@ public class CalcActivity extends Activity {
     private TextView mTvResult;
 
     private String res = "";
-    String[] numbers;
+//    String[] numbers;
 
 //    public String getRes() {
 //        return res;
@@ -59,7 +59,7 @@ public class CalcActivity extends Activity {
 //                Date date = new Date();
 //                Toast.makeText(getApplicationContext(), "Вы нажали кнопку 1", Toast.LENGTH_SHORT).show();
 //                mTvResult.setText("Нажата кнопка 1 " + date);
-                method("1", res);
+                method("1");
             }
         });
 
@@ -68,35 +68,35 @@ public class CalcActivity extends Activity {
             public void onClick(View v) {
 //                Toast.makeText(getApplicationContext(), "Вы нажали кнопку 2", Toast.LENGTH_SHORT).show();
 //                mTvResult.setText("Нажата кнопка 2");
-                method("2", res);
+                method("2");
             }
         });
 
         mBt03.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                method("3", res);
+                method("3");
             }
         });
 
         mBt04.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                method("4", res);
+                method("4");
             }
         });
 
         mBt05.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                method("5", res);
+                method("5");
             }
         });
 
         mBt06.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                method("6", res);
+                method("6");
             }
         });
 
@@ -112,15 +112,13 @@ public class CalcActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                method("+", res);  //prohibit several pluses in a row and like first sign
+//                method("+");  //prohibit several pluses in a row and like first sign
 
 
-//                if (res.isEmpty()){
-//                    method("");
-//                }
-//                if (res.charAt(res.length() - 1) == 43){
-//                    mTvResult.setText("plus before");
-//                }
+                if (!(res.isEmpty() || res.charAt(res.length() - 1) == 43)) {
+                    method("+");
+                }
+
 ////                if (!("" + res.charAt(res.length() - 1)).equals("+") &&
 ////                        !(res.equals(null)
 ////                        /*"" + mTvResult.getText().charAt(mTvResult.getText().length() - 1) != ""*/)) {
@@ -133,34 +131,48 @@ public class CalcActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                numbers = res.split("\\+");
-                res = "";
+                String[] numbers = res.split("\\+");
+
+//                for (int i = 0; i < numbers.length; i++) {
+//                    mTvResult.setText(numbers[i]);
+//                }
+//                res = "";
                 int resInt = 0;
-                for (String number : numbers) {
-                    try{
-                        resInt += Integer.parseInt(number);
-                    }catch (Exception e){
-                        Toast.makeText(getApplicationContext(), "Exception!", Toast.LENGTH_SHORT).show();
+                try {
+                    for (int i = 0; i < numbers.length; i++) {
+                        resInt += Integer.parseInt(numbers[i]);
                     }
+                    mTvResult.setText("" + resInt);
+                    res = "";
+                }catch(Exception e){
+//                    String couse = String.valueOf(e.getCause());
+                    Toast.makeText(getApplicationContext(), String.valueOf(e.getCause())/*"Exception!"*/, Toast.LENGTH_SHORT).show();
                 }
-                res = String.valueOf(resInt);
-                mTvResult.setText(resInt);
-                res = "";
+//                for (String number : numbers) {
+//                    try{
+//                        resInt += Integer.parseInt(number);
+//                    }catch (Exception e){
+//                        Toast.makeText(getApplicationContext(), "Exception!", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//                res = String.valueOf(resInt);
+//                mTvResult.setText(resInt);
+//                res = "";
             }
         });
 
 
     }
 
-    void method(String s) {
-//        Toast.makeText(getApplicationContext(), "Вы нажали кнопку 1", Toast.LENGTH_SHORT).show();
-        mTvResult.setText(mTvResult.getText() + s);
-    }
+//    void method(String s) {
+////        Toast.makeText(getApplicationContext(), "Вы нажали кнопку 1", Toast.LENGTH_SHORT).show();
+//        mTvResult.setText(mTvResult.getText() + s);
+//    }
 
-    void method(String s, String res) {
-        mTvResult.setText(mTvResult.getText() + s);
+    void method(String s) {
         this.res += s;
-        Toast.makeText(getApplicationContext(), res, Toast.LENGTH_SHORT).show();
+        mTvResult.setText(this.res/*mTvResult.getText() + s*/);
+        Toast.makeText(getApplicationContext(), this.res, Toast.LENGTH_SHORT).show();
 
     }
 
