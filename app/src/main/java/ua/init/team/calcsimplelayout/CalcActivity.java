@@ -143,11 +143,14 @@ public class CalcActivity extends Activity {
                         resInt += Integer.parseInt(numbers[i]);
                     }
                     mTvResult.setText("" + resInt);
-                    res = "";
+                    res = "" + resInt;
                 }catch(Exception e){
 //                    String couse = String.valueOf(e.getCause());
-                    Toast.makeText(getApplicationContext(), String.valueOf(e.getCause())/*"Exception!"*/, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), String.valueOf(e.getMessage())/*"Exception!"*/, Toast.LENGTH_SHORT).show();
+                    mTvResult.setText(e.getMessage());
+
                 }
+
 //                for (String number : numbers) {
 //                    try{
 //                        resInt += Integer.parseInt(number);
